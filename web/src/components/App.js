@@ -6,13 +6,45 @@ const Home = () => {
 	return (<h1>Welcome Home</h1>);
 };
 
-const IngredientsBox = () => {
-	return (<h1>Zutaten verwalten</h1>)
-};
-
 const RecipesBox = () => {
 	return (<h1>Rezepte verwalten</h1>)
 };
+
+class IngredientsBox extends React.Component {
+
+	constructor() {
+		super();
+		this.state = {
+			ingredients: []
+		}
+	}
+
+	componentWillMount() {
+		this.fetchIngredients();
+	}
+
+	fetchIngredients() {
+		axios.get('http://localhost:5000/api/ingredients')
+			.then(result => this.setState({ ingredients: result.data }))
+			.catch(error => console.log(error));
+	}
+
+	listIngredients() {
+		return this.state.ingredients.map((ingredient) => {
+			return <li id={ingredient.id}>{ingredient.name}</li>
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>Zutaten</h1>
+				<ul>{this.listIngredients()}</ul>
+			</div>
+		);
+	}
+
+}
 
 class App extends React.Component {
 
