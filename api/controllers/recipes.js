@@ -2,13 +2,18 @@
 
 const express = require('express');
 const router = express.Router();
+const Recipe = require('../models/index').recipe;
 
 router.get('/', (req, res) => {
-	return res.json({ 'status': 'list of all recipes is not supported yet' });
+	Recipe.findAll()
+		.then(recipes => res.json(recipes))
+		.catch(error => res.status(500).json({'name': error.name, 'message': error.message}));
 });
 
 router.post('/', (req, res) => {
-	return res.json({ 'status': 'adding recipes is not supported yet'})
+	Recipe.create(req.body)
+		.then(data => res.status(201).json(data))
+		.catch(error => res.status(500).json({'name': error.name, 'message': error.message}));
 });
 
 module.exports = router;
