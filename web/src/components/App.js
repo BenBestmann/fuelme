@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, browserHistory } from 'react-router-dom';
-import axios from 'axios';
+import IngredientsPage from './ingredients/IngredientsPage';
 
 const Home = () => {
 	return (<h1>Welcome Home</h1>);
@@ -9,42 +9,6 @@ const Home = () => {
 const RecipesBox = () => {
 	return (<h1>Rezepte verwalten</h1>)
 };
-
-class IngredientsBox extends React.Component {
-
-	constructor() {
-		super();
-		this.state = {
-			ingredients: []
-		}
-	}
-
-	componentWillMount() {
-		this.fetchIngredients();
-	}
-
-	fetchIngredients() {
-		axios.get('http://localhost:5000/api/ingredients')
-			.then(result => this.setState({ ingredients: result.data }))
-			.catch(error => console.log(error));
-	}
-
-	listIngredients() {
-		return this.state.ingredients.map((ingredient) => {
-			return <li id={ingredient.id}>{ingredient.name}</li>
-		});
-	}
-
-	render() {
-		return (
-			<div>
-				<h1>Zutaten</h1>
-				<ul>{this.listIngredients()}</ul>
-			</div>
-		);
-	}
-
-}
 
 class App extends React.Component {
 
@@ -60,7 +24,7 @@ class App extends React.Component {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/rezepte" component={RecipesBox} />
-						<Route path="/zutaten" component={IngredientsBox} />
+						<Route path="/zutaten" component={IngredientsPage} />
 					</Switch>
 				</div>
 			</Router>
