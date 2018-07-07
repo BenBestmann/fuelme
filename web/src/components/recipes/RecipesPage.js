@@ -15,7 +15,7 @@ class RecipesPage extends React.Component {
 	}
 
 	fetchIngredients() {
-		axios.get('http://localhost:5000/api/recipes')
+		axios.get('https://fuel-me.herokuapp.com/api/recipes')
 			.then(result => this.setState({ recipes: result.data }))
 			.catch(error => console.log(error));
 	}
