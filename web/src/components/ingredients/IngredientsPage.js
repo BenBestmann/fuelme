@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import IngredientsTable from './IngredientsTable';
+import Ingredient from './Ingredient';
 
 class IngredientsPage extends React.Component {
 
@@ -22,7 +24,7 @@ class IngredientsPage extends React.Component {
 
 	listIngredients() {
 		return this.state.ingredients.map((ingredient) => {
-			return <li id={ingredient.id}>{ingredient.name}</li>
+			return <Ingredient key={ingredient.id} data={ingredient} />;
 		});
 	}
 
@@ -30,7 +32,7 @@ class IngredientsPage extends React.Component {
 		return (
 			<div>
 				<h1>Zutaten</h1>
-				<ul>{this.listIngredients()}</ul>
+				<IngredientsTable data={this.state.ingredients} />
 			</div>
 		);
 	}

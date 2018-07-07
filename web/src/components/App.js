@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, browserHistory } from 'react-router-dom';
+import AppLayout from '../layouts/AppLayout';
 import IngredientsPage from './ingredients/IngredientsPage';
 import RecipesPage from './recipes/RecipesPage';
+import AppRoute from '../common/AppRoute';
 
 const Home = () => {
 	return (<h1>Welcome Home</h1>);
@@ -12,18 +14,11 @@ class App extends React.Component {
 	render() {
 		return (
 			<Router history={ browserHistory }>
-				<div>
-					<div>
-						<Link to="/">Home</Link>&nbsp;
-						<Link to="/rezepte">Rezepte</Link>&nbsp;
-						<Link to="/zutaten">Zutaten</Link>
-					</div>
-					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route path="/rezepte" component={RecipesPage} />
-						<Route path="/zutaten" component={IngredientsPage} />
-					</Switch>
-				</div>
+				<Switch>
+					<AppRoute exact path="/" layout={AppLayout} component={Home} />
+					<AppRoute path="/rezepte" layout={AppLayout} component={RecipesPage} />
+					<AppRoute path="/zutaten" layout={AppLayout} component={IngredientsPage} />
+				</Switch>
 			</Router>
 		);
 	}

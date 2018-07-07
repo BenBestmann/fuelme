@@ -12,16 +12,15 @@ const ingredientSchema = new mongoose.Schema({
 		totalCarbs: { type: Number },
 		sugar: { type: Number }
 	},
-	seasonFirstMonth: { type: Number, default: 0 },
-	seasonLastMonth: { type: Number, default: 11 },
+	season: { type: [Number] },
 	preferredSupplier: { type: String, default: 'Supermarkt' },
 	isBasic: { type: Boolean, default: false },
-	isMeat: { type: Boolean, default: null },
-	isFish: { type: Boolean, default: null },
-	isVegetarian: { type: Boolean, default: null },
-	isVegan: { type: Boolean, default: null },
-	hasLactose: { type: Boolean, default: null },
-	hasGluten: { type: Boolean, default: null }
+	isMeat: { type: Boolean },
+	isFish: { type: Boolean },
+	isVegetarian: { type: Boolean },
+	isVegan: { type: Boolean },
+	hasLactose: { type: Boolean },
+	hasGluten: { type: Boolean }
 },{
 	collection: 'ingredients',
 	timestamps: true,
@@ -31,7 +30,7 @@ const ingredientSchema = new mongoose.Schema({
 
 ingredientSchema.virtual('hasSeason').get(function() {
 	const now = new Date();
-	return now.getMonth() >= this.seasonFirstMonth && now.getMonth() <= this.seasonLastMonth;
+	return (this.season.includes(now.getMonth()));
 });
 
 module.exports = mongoose.model('Ingredient', ingredientSchema);
