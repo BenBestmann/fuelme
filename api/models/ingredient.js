@@ -3,24 +3,15 @@
 const mongoose = require('mongoose');
 
 const ingredientSchema = new mongoose.Schema({
-	name: { type: String, required: true },
-	nutritionData: {
-		kcal: { type: Number },
-		protein: { type: Number },
-		lipid: { type: Number },
-		fiber: { type: Number },
-		totalCarbs: { type: Number },
-		sugar: { type: Number }
-	},
-	season: { type: [Number] },
-	preferredSupplier: { type: String, default: 'Supermarkt' },
+	name: { type: String, unique: true, required: true },
+	category: { type: String, enum: ['vegan', 'abp', 'meat', 'poultry', 'seafood'] },
+	season: { type: [Number], default: Array.from(Array(12).keys()) },
 	isBasic: { type: Boolean, default: false },
-	isMeat: { type: Boolean },
-	isFish: { type: Boolean },
-	isVegetarian: { type: Boolean },
-	isVegan: { type: Boolean },
-	hasLactose: { type: Boolean },
-	hasGluten: { type: Boolean }
+	synonyms: { type: [String] },
+	tags: { type: [String] },
+	preferredSupplier: { type: String, default: 'Supermarkt' },
+	hasLactose: { type: Boolean, default: false },
+	hasGluten: { type: Boolean, default: false }
 },{
 	collection: 'ingredients',
 	timestamps: true,
