@@ -4,9 +4,6 @@ import { Table, Icon } from 'antd';
 const IngredientsTable = (props) => {
 
 	const renderBool = (value) => {
-		if(value === null) {
-			return <Icon type="question" />
-		}
 		if(value) {
 			return <Icon type="check" />
 		} else {
@@ -14,35 +11,32 @@ const IngredientsTable = (props) => {
 		}
 	};
 
+	const renderArray = (value) => {
+		if(value && Array.isArray(value)) {
+			return value.toString();
+		}
+	};
+
 	const columns = [{
 		title: 'Name',
 		dataIndex: 'name'
 	}, {
-		title: 'Bezugsquelle',
-		dataIndex: 'preferredSupplier'
-	}, {
-		title: 'Basic',
-		dataIndex: 'isBasic',
-		render: renderBool
+		title: 'Kategorie',
+		dataIndex: 'category'
 	}, {
 		title: 'Saison',
 		dataIndex: 'season',
-		render: value => value.toString()
+		render: renderArray
 	}, {
-		title: 'Fleisch',
-		dataIndex: 'isMeat',
-		render: renderBool
+		title: 'Bezugsquelle',
+		dataIndex: 'preferredSupplier'
 	}, {
-		title: 'Fisch',
-		dataIndex: 'isFish',
-		render: renderBool
+		title: 'Tags',
+		dataIndex: 'tags',
+		render: renderArray
 	}, {
-		title: 'Veggie',
-		dataIndex: 'isVegetarian',
-		render: renderBool
-	}, {
-		title: 'Vegan',
-		dataIndex: 'isVegan',
+		title: 'Basic',
+		dataIndex: 'isBasic',
 		render: renderBool
 	}, {
 		title: 'Lactose',
