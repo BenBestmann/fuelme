@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const Mongo = require('./api/utils/mongo-connector');
 const routes = require('./api/controllers');
 
 const port = process.env.PORT || 5000;
@@ -30,3 +31,6 @@ app.use('/api', routes);
 
 // Start server
 app.listen(port);
+
+// Connect to MongoDB
+Mongo.connect();

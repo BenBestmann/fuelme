@@ -2,18 +2,16 @@
 
 const express = require('express');
 const router = express.Router();
-const Recipe = require('../models/index').recipe;
+const Recipe = require('../models/recipe');
 
 router.get('/', (req, res) => {
-	Recipe.findAll()
-		.then(recipes => res.json(recipes))
-		.catch(error => res.status(500).json({'name': error.name, 'message': error.message}));
+	Recipe.find({}).then(recipes => res.json(recipes));
 });
 
 router.post('/', (req, res) => {
 	Recipe.create(req.body)
 		.then(data => res.status(201).json(data))
-		.catch(error => res.status(500).json({'name': error.name, 'message': error.message}));
+		.catch(error => res.status(500).json(error));
 });
 
 module.exports = router;
