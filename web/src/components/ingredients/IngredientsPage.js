@@ -15,7 +15,7 @@ class IngredientsPage extends React.Component {
 	}
 
 	fetchIngredients() {
-		axios.get('hhttps://fuel-me.herokuapp.com/api/ingredients')
+		axios.get('https://fuel-me.herokuapp.com/api/ingredients')
 			.then(result => this.setState({ ingredients: result.data }))
 			.catch(error => console.log(error));
 	}
