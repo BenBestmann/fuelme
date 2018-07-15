@@ -22,24 +22,20 @@ const IngredientsTable = (props) => {
 		dataIndex: 'name'
 	}, {
 		title: 'Kategorie',
-		dataIndex: 'category'
+		dataIndex: 'parent'
 	}, {
 		title: 'Saison',
-		dataIndex: 'season',
+		dataIndex: 'monthsOfSeason',
 		render: renderArray
 	}, {
 		title: 'Bezugsquelle',
 		dataIndex: 'preferredSupplier'
 	}, {
-		title: 'Tags',
-		dataIndex: 'tags',
-		render: renderArray
-	}, {
 		title: 'Basic',
 		dataIndex: 'isBasic',
 		render: renderBool
 	}, {
-		title: 'Lactose',
+		title: 'Laktose',
 		dataIndex: 'hasLactose',
 		render: renderBool
 	}, {
