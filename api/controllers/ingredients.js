@@ -11,7 +11,10 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	Ingredient.create(req.body)
 		.then(data => res.status(201).json(data))
-		.catch(error => res.status(500).json(error));
+		.catch(error => {
+			console.log(error);
+			res.status(500).json(error)
+		});
 });
 
 module.exports = router;

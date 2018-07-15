@@ -4,17 +4,20 @@ const mongoose = require('mongoose');
 const units = require('./units');
 
 const recipeSchema = new mongoose.Schema({
-	name: { type: String, required: true },
+	name: { type: String, required: true, unique: true },
 	ingredients: [{
-		ingredient: { type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' },
-		amount: { type: Number, required: true },
-		unit: { type: String, enum: units, required: true }
+		ingredient: { type: mongoose.Schema.Types.ObjectId, refPath: 'ingredients.type' },
+		type: { type: String, enum: ['Ingredient', 'Recipe'] },
+		amount: { type: Number },
+		unit: { type: String, enum: units }
 	}],
-	instructions: { type: String, required: true },
+	categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
+	prepInstructions: { type: String },
+	cookingInstructions: { type: String },
+	prepTimeInMinutes: { type: Number },
 	servings: { type: Number, required: true },
-	minutes: { type: Number },
 	pictureUrl: { type: String, default: 'https://s-media-cache-ak0.pinimg.com/originals/25/2e/ca/252eca592c1c85b46b7c7210ab23afe1.jpg' },
-	tags: { type: [String] }
+	sourceUrl: { type: String }
 },{
 	collection: 'recipes',
 	timestamps: true,

@@ -3,12 +3,10 @@
 const mongoose = require('mongoose');
 
 const ingredientSchema = new mongoose.Schema({
-	name: { type: String, unique: true, required: true },
-	category: { type: String, enum: ['vegan', 'abp', 'meat', 'poultry', 'seafood'] },
-	season: { type: [Number], default: Array.from(Array(12).keys()) },
-	isBasic: { type: Boolean, default: false },
-	synonyms: { type: [String] },
-	tags: { type: [String] },
+	name: { type: String, required: true, unique: true },
+	monthsOfSeason: { type: [Number], default: Array.from(Array(12).keys()) },
+	isBasic: { type: Boolean, default: false }, // if true, will not be added to the shopping list
+	parent: { type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' },
 	preferredSupplier: { type: String, default: 'Supermarkt' },
 	hasLactose: { type: Boolean, default: false },
 	hasGluten: { type: Boolean, default: false }
@@ -21,7 +19,7 @@ const ingredientSchema = new mongoose.Schema({
 
 ingredientSchema.virtual('hasSeason').get(function() {
 	const now = new Date();
-	return (this.season.includes(now.getMonth()));
+	return (this.monthsOfSeason.includes(now.getMonth()));
 });
 
 module.exports = mongoose.model('Ingredient', ingredientSchema);

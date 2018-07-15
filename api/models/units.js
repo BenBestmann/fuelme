@@ -9,8 +9,7 @@ const units = [
 	'Esslöffel',
 	'Handvoll',
 	'Tasse',
-	'Prise',
-	'Messerspitze'
+	'Prise'
 ];
 
 module.exports = units;
