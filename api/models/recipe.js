@@ -5,6 +5,7 @@ const units = require('./units');
 
 const recipeSchema = new mongoose.Schema({
 	name: { type: String, required: true, unique: true },
+	description: { type: String },
 	ingredients: [{
 		ingredient: { type: mongoose.Schema.Types.ObjectId, refPath: 'ingredients.type' },
 		type: { type: String, enum: ['Ingredient', 'Recipe'] },
