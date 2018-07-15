@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Row, Col, Button } from 'antd';
 
 class RecipesPage extends React.Component {
 
@@ -30,7 +30,16 @@ class RecipesPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Rezepte</h1>
+				<Row align="top">
+					<Col span={20}>
+						<h1>Rezepte</h1>
+					</Col>
+					<Col span={4}>
+						<div style={{ float: 'right'}}>
+							<Button type="primary" shape="circle" icon="plus" size="large" />
+						</div>
+					</Col>
+				</Row>
 				<List
 					size="large"
 					header={<div>Header</div>}
