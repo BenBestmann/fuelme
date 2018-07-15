@@ -22,12 +22,6 @@ class IngredientsPage extends React.Component {
 			.catch(error => console.log(error));
 	}
 
-	listIngredients() {
-		return this.state.ingredients.map((ingredient) => {
-			return <Ingredient key={ingredient.id} data={ingredient} />;
-		});
-	}
-
 	render() {
 		return (
 			<div>
