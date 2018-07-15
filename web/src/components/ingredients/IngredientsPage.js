@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import IngredientsTable from './IngredientsTable';
-import Ingredient from './Ingredient';
 
 class IngredientsPage extends React.Component {
 
