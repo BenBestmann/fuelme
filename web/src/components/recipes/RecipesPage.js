@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { List, Avatar } from 'antd';
 
 class RecipesPage extends React.Component {
 
@@ -30,7 +31,26 @@ class RecipesPage extends React.Component {
 		return (
 			<div>
 				<h1>Rezepte</h1>
-				<ul>{this.listRecipes()}</ul>
+				<List
+					size="large"
+					header={<div>Header</div>}
+					pagination={{
+						onChange: (page) => {
+							console.log(page);
+						},
+						pageSize: 10,
+					}}
+					dataSource={this.state.recipes}
+					renderItem={item => (
+						<List.Item>
+							<List.Item.Meta
+								avatar={<Avatar src={item.pictureUrl} />}
+								title={<a href="https://ant.design">{item.name}</a>}
+								description={item.prepInstructions}
+							/>
+						</List.Item>
+					)}
+				/>
 			</div>
 		);
 	}
